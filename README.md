@@ -1,1 +1,1 @@
-# advent-of-rust-2022
+# Advent of Rust 🦀 2022
