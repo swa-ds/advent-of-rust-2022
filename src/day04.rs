@@ -24,8 +24,12 @@ mod solution {
         count
     }
 
-    fn overlaps(r1: RangeInclusive<usize>, r2: RangeInclusive<usize>) -> bool {
-        r1.start() <= r2.end() && r2.start() <= r1.end()
+    fn to_range(str: Option<&str>) -> RangeInclusive<usize> {
+        // println!("{:?}", str);
+        let mut split = str.unwrap().split("-");
+        let start = split.next().unwrap().parse::<usize>().unwrap();
+        let end = split.next().unwrap().parse::<usize>().unwrap();
+        start..=end
     }
 
     fn contains(r1: RangeInclusive<usize>, r2: RangeInclusive<usize>) -> bool {
@@ -33,13 +37,8 @@ mod solution {
             (r1.start() <= r2.start() && r1.end() >= r2.end())
     }
 
-
-    fn to_range(str: Option<&str>) -> RangeInclusive<usize> {
-        // println!("{:?}", str);
-        let mut split = str.unwrap().split("-");
-        let start = split.next().unwrap().parse::<usize>().unwrap();
-        let end = split.next().unwrap().parse::<usize>().unwrap();
-        start..=end
+    fn overlaps(r1: RangeInclusive<usize>, r2: RangeInclusive<usize>) -> bool {
+        r1.start() <= r2.end() && r2.start() <= r1.end()
     }
 
     #[cfg(test)]
