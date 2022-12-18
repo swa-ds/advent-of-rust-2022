@@ -12,7 +12,7 @@ mod solution {
 
         let line_len = input.find('\n').unwrap();
         let stacks_count = (line_len + 1) / 4;
-        println!("Number of stacks: {}", stacks_count);
+        // println!("Number of stacks: {}", stacks_count);
         let mut stacks: Vec<Vec<char>> = vec![];
         for _ in 0..stacks_count {
             stacks.push(vec![]);
