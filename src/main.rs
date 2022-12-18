@@ -1,6 +1,11 @@
 #[macro_use]
 extern crate lazy_static;
 
+enum Solution {
+    PartOne,
+    PartTwo,
+}
+
 mod day00;
 mod day01;
 mod day02;
