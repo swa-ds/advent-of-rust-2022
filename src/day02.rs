@@ -2,15 +2,11 @@
 mod solution {
     use std::collections::HashMap;
     use crate::day02::solution::Item::*;
-    use crate::day02::solution::Part::*;
+    use crate::Solution::*;
     use crate::day02::solution::Outcome::*;
+    use crate::Solution;
 
     const INPUT: &'static str = include_str!("input02.txt");
-
-    enum Part {
-        PartOne,
-        PartTwo,
-    }
 
     #[derive(Copy, Clone, Debug)]
     enum Item {
@@ -46,7 +42,7 @@ mod solution {
         .iter().cloned().collect();
     }
 
-    fn solve(input: &str, part: Part) -> usize {
+    fn solve(input: &str, part: Solution) -> usize {
         let mut score = 0;
         let rounds = input.split("\n");
         for (i, round) in rounds.filter(|r| !r.is_empty()).into_iter().enumerate() {

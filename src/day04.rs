@@ -1,13 +1,9 @@
 mod solution {
     use std::ops::RangeInclusive;
-    use crate::day04::solution::Solution::*;
+    use crate::Solution;
+    use crate::Solution::*;
 
     const INPUT: &'static str = include_str!("input04.txt");
-
-    enum Solution {
-        PartOne,
-        PartTwo,
-    }
 
     fn solve(input: &str, part: Solution) -> usize {
         let mut count = 0;
