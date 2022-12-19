@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 mod solution {
     use std::ops::RangeInclusive;
     use crate::Solution;

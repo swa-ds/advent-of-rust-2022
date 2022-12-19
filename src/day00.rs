@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 mod solution {
 
     fn solve() -> &'static str {

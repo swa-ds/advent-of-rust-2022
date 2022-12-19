@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 mod solution {
 
     const INPUT: &'static str = include_str!("input01.txt");
