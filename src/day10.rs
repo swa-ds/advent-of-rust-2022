@@ -63,19 +63,13 @@ mod solution {
 
     fn draw_pixel(cycle: i32, x: i32, output: &mut String) {
         let pos = cycle % 40;
-        let pixel;
-        if pos >= x-1 && pos <= x+1 {
-            pixel = "#";
-        } else {
-            pixel = ".";
-        }
+        let pixel = if (x-1..=x+1).contains(&pos) { "#" } else { "." };
         // println!("cycle={} x={} pos={} pixel={}", cycle, x, pos, pixel);
         *output += pixel;
         if pos == 39 {
             *output += "\n";
         }
     }
-
 
     fn parse(input: &str) -> Vec<(&str, Option<i32>)> {
         let mut instructions = vec![];
@@ -96,15 +90,15 @@ mod solution {
     mod tests {
         use super::*;
 
-        const TEST_INPUT:    &'static str = include_str!("input10_test.txt");
+        const TEST_INPUT: &'static str = include_str!("input10_test.txt");
         const EXPECTED_TEST: &'static str = include_str!("input10_expected_test.txt");
-        const EXPECTED_P2:   &'static str = include_str!("input10_expected_part_2.txt");
+        const EXPECTED_P2: &'static str = include_str!("input10_expected_part_2.txt");
 
         #[test]
         fn test_solve_part_1() {
             assert_eq!(13140, solve_part_1(TEST_INPUT));
         }
-        
+
         #[test]
         fn test_solve_part_2() {
             assert_eq!(EXPECTED_TEST, solve_part_2(TEST_INPUT));
@@ -114,7 +108,7 @@ mod solution {
         fn do_solve_part_1() {
             assert_eq!(12980, solve_part_1(INPUT));
         }
-        
+
         #[test]
         fn do_solve_part_2() {
             let output = solve_part_2(INPUT);
