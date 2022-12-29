@@ -20,7 +20,5 @@ mod day10;
 mod day11;
 
 fn main() {
-    println!("{}", "Hello Advent of Code 2022 (in Rust! 🦀)");
-    
-    println!("{}", 1501 / 3);
+    println!("Hello Advent of Code 2022 (in Rust! 🦀)");
 }
