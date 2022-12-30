@@ -44,7 +44,7 @@ mod solution {
         
         monkey_business.into_iter()
             .take(2)
-            .fold(1, |a, b| a * b)
+            .product()
     }
 
     fn play_round(monkeys: &mut Vec<Monkey>) {
