@@ -1,6 +1,9 @@
 mod solution {
     use std::cell::RefCell;
+    use std::collections::HashSet;
     use regex::Regex;
+    use crate::Solution;
+    use crate::Solution::*;
 
     const INPUT: &'static str = include_str!("input11.txt");
 
@@ -25,10 +28,31 @@ mod solution {
     }
     
     fn solve_part_1(input: &str) -> usize {
-        let mut monkeys = parse(input);
+        solve(input, PartOne)
+    }
 
-        for _ in 0..20 {
-            play_round(&mut monkeys);
+    fn solve_part_2(input: &str) -> usize {
+        // part 2 solved thanks to razziel89 !
+        // https://doctoolchain.org/aoc-2022/generated/coder/razziel89/generatedDays.html#_day_11_rust
+        solve(input, PartTwo)
+    }
+
+    fn solve(input: &str, part: Solution) -> usize {
+    
+        let mut monkeys = parse(input);
+        let prod_of_div_checks = monkeys.iter()
+            .map(|m| m.divisible_by)
+            .collect::<HashSet<_>>()
+            .into_iter()
+            .product::<usize>();
+        
+        let rounds = match part {
+            PartOne => 0..20,
+            PartTwo => 0..10000,
+        };
+
+        for _ in rounds {
+            play_round(&mut monkeys, prod_of_div_checks, &part);
         }
 
         // for m in &monkeys {
@@ -47,12 +71,21 @@ mod solution {
             .product()
     }
 
-    fn play_round(monkeys: &mut Vec<Monkey>) {
+    fn play_round(monkeys: &mut Vec<Monkey>, prod_of_div_checks: usize, part: &Solution) {
         for monkey in monkeys.iter() {            
             while !monkey.items.borrow().is_empty() {
                 let it = monkey.items.borrow_mut().remove(0);
                 let mut it_new = operate(it, monkey.inspect_operator, monkey.inspect_op_arg);
-                it_new = it_new / 3;
+
+                match part { 
+                    PartOne => {
+                        it_new = it_new / 3;
+                    } 
+                    PartTwo => {
+                        it_new = it_new % prod_of_div_checks
+                    }
+                }
+                
                 let to_throw = match it_new % monkey.divisible_by == 0 {
                     true => &monkeys[monkey.true_monkey_id],
                     false => &monkeys[monkey.false_monkey_id],
@@ -122,8 +155,18 @@ mod solution {
         }
         
         #[test]
+        fn test_solve_part_2() {
+            assert_eq!(2713310158, solve_part_2(TEST_INPUT));
+        }
+        
+        #[test]
         fn do_solve_part_1() {
             assert_eq!(110220, solve_part_1(INPUT));
+        }
+
+        #[test]
+        fn do_solve_part_2() {
+            assert_eq!(19457438264, solve_part_2(INPUT));
         }
 
     }
